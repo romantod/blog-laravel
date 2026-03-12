@@ -1,43 +1,42 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HelloController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', [HelloController::class, 'index']);
 
-Route::get('/user/{id}', [HelloController::class, 'showUser']); // {id} - параметр из URL
-
-Route::get('/users/create', [HelloController::class, 'create']);
+Route::get('/users/create', [UserController::class, 'create']);
 
 Route::get('/posts/create', [PostController::class, 'create']);
 
-Route::post('/users', [HelloController::class, 'store']);
+Route::get('/users/{user}/edit', [UserController::class, 'edit']);
+
+Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
+
+Route::get('/users/{user}/posts', [UserController::class, 'userPosts']);
+
+Route::get('/hello', [UserController::class, 'index']);
+
+Route::post('/users', [UserController::class, 'store']);
 
 Route::post('/posts', [PostController::class, 'store']);
 
-Route::get('/users', [HelloController::class, 'users']);
-
-Route::get('/users/{id}', [HelloController::class, 'showOneUser']);
-
-Route::get('/users/{id}/edit', [HelloController::class, 'edit']);
-
-Route::get('/posts/{id}/edit', [PostController::class, 'edit']);
-
-Route::put('/users/{id}', [HelloController::class, 'update']);
-
-Route::put('/posts/{id}', [PostController::class, 'update']);
-
-Route::delete('users/{id}', [HelloController::class, 'destroy']);
-
-Route::delete('posts/{id}', [PostController::class, 'destroy']);
-
-Route::get('/users/{id}/posts', [HelloController::class, 'userPosts']);
+Route::get('/users', [UserController::class, 'users']);
 
 Route::get('/posts', [PostController::class, 'index']);
 
-Route::get('/posts/{id}', [PostController::class, 'PostAuthor']);
+Route::get('/users/{user}', [UserController::class, 'showOneUser']);
+
+Route::get('/posts/{post}', [PostController::class, 'show']);
+
+Route::put('/users/{user}', [UserController::class, 'update']);
+
+Route::put('/posts/{post}', [PostController::class, 'update']);
+
+Route::delete('users/{user}', [UserController::class, 'destroy']);
+
+Route::delete('posts/{post}', [PostController::class, 'destroy']);

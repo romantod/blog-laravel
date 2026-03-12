@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    background: #f9f9f9;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* Кнопки - спокойные цвета */
+.btn {
+    display: inline-block;
+    padding: 7px 14px;
+    margin: 3px 3px 3px 0;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 15px;
+    background: white;
+    color: #333;
+}
+
+.btn:hover {
+    background: #f0f0f0;
+}
+
+.btn-primary {
+    background: #e3f2fd;
+    border-color: #90caf9;
+    color: #1976d2;
+}
+
+.btn-primary:hover {
+    background: #bbdefb;
+}
+
+.btn-success {
+    background: #e8f5e9;
+    border-color: #a5d6a7;
+    color: #388e3c;
+}
+
+.btn-success:hover {
+    background: #c8e6c9;
+}
+
+.btn-warning {
+    background: #fff3e0;
+    border-color: #ffcc80;
+    color: #f57c00;
+}
+
+.btn-warning:hover {
+    background: #ffe0b2;
+}
+
+.btn-danger {
+    background: #ffebee;
+    border-color: #ef9a9a;
+    color: #d32f2f;
+}
+
+.btn-danger:hover {
+    background: #ffcdd2;
+}
+
+/* Сообщения */
+.alert {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.alert-error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+/* Карточки постов */
+.post-card {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+}
+
+/* Формы */
+input, textarea, select {
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 80px;
+}
+
+label {
+    font-size: 16px;
+    margin-top: 10px;
+}

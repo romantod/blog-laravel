@@ -10,6 +10,7 @@
     @foreach ($users as $user)
         <h3>
             {{ $user->name }} - {{ $user->email }}
+            <a href="/users/{{ $user->id }}">Просмотр</a>
             <a href="/users/{{ $user->id }}/edit">Редактировать</a>
 
             <form method="POST" action="/users/{{ $user->id }}" style="display:inline">
