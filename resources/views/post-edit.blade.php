@@ -21,22 +21,20 @@
         @csrf
         @method('PUT')
         
-            <label>Заголовок:</label>
-            <input type="text" name="title" value="{{ old('title', $post->title) }}" required>
-        
-        
-            <label>Содержание:</label>
-            <textarea name="content" required>{{ old('content', $post->content) }}</textarea>
-        
-        
-            <label>Автор:</label>
-            <select name="user_id" required>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $post->user_id == $user->id ? 'selected' : '' }} >
-                        {{ $user->name }}
-                    </option>
-                @endforeach
-            </select>
+        <label>Заголовок:</label>
+        <input type="text" name="title" value="{{ old('title', $post->title) }}" required>
+            
+        <label>Содержание:</label>
+        <textarea name="content" required>{{ old('content', $post->content) }}</textarea>
+            
+        <label>Автор:</label>
+        <select name="user_id" required>
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}" {{ old('user_id', $post->user_id) == $user->id ? 'selected' : '' }} >
+                    {{ $user->name }}
+                </option>
+            @endforeach
+        </select>
         
         <button type="submit" class="btn btn-success">Сохранить</button><br>
         <a href="/posts" class="btn btn-primary">Отмена</a>
