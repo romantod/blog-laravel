@@ -11,10 +11,12 @@ Route::get('/', function () {
 
 
 Route::resource('posts', PostController::class);
+
+Route::get('/users/{user}/latest-posts', [UserController::class, 'userLatestPosts']);
+
 Route::resource('users', UserController::class);
 
 Route::get('/users/{user}/posts', [UserController::class, 'userPosts']);
-
 
 
 

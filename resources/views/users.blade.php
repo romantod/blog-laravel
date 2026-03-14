@@ -12,7 +12,10 @@
 
     @foreach ($users as $user)
         <div class="post-card" id="user-{{ $user->id }}">
-            <strong>{{ $user->name }}</strong><br>
+            <strong>{{ $user->name }}</strong><br><br>
+            @if ($user->bio)
+                О себе: {{ $user->bio }}<br><br>
+            @endif
             {{ $user->email }}<br><br>
             <a href="/users/{{ $user->id }}" class="btn btn-primary">Просмотр</a>
             <a href="/users/{{ $user->id }}/edit" class="btn btn-warning">Редактировать</a>

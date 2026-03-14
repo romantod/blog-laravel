@@ -9,7 +9,7 @@ use App\Models\User;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::all();
+        $posts = Post::latest()->get();
         return view('posts', ['posts' => $posts]);
     }
 
@@ -29,12 +29,7 @@ class PostController extends Controller
             'user_id' => 'required|exists:users,id' // user_id должен существовать в таблице users
         ]);
 
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = $request->user_id;
-        $post->save();
-
+        Post::create($request->only(['title', 'content', 'user_id']));
         return redirect('/posts')->with('success', 'Пост успешно создан!');
     }
 
@@ -50,11 +45,7 @@ class PostController extends Controller
             'user_id' => 'required|exists:users,id' // user_id должен существовать в таблице users
         ]);
         
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = $request->user_id;
-        $post->save();
-
+        $post->update($request->only(['title', 'content', 'user_id']));
         return redirect('/posts')->with('success', 'Пост успешно обновлен!');
     }
 

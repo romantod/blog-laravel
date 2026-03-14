@@ -23,13 +23,21 @@ class UserController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'name' => 'required|min:2|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:4|confirmed',
+            'bio' => 'nullable|max:500'
+        ]);
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->bio = $request->bio;
         $user->save();
 
-        return redirect('/users')->with('success', 'Пользователь успешно создан!');
+        return redirect('/users/' . $user->id)->with('success', 'Пользователь успешно создан!');
     }
 
     public function edit(User $user) {
@@ -37,11 +45,24 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user) {
-        $user->name = $request->name; // берёт данные из формы (как $_POST['name'])
-        $user->email = $request->email;
-        $user->save(); // выполняет INSERT INTO users ...
+        $request->validate([
+            'name' => 'required|min:2|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id, // Чтобы пользователь мог оставить свой же email (игнорируем его ID при проверке уникальности)
+            'password' => 'nullable|min:4|confirmed', // nullable чтобы при редактировании пользователь мог не менять пароль, confirmed требует создать password_confirmation в форме
+            'bio' => 'nullable|max:500'
+        ]);
 
-        return redirect('/users')->with('success', 'Пользователь успешно обновлен!');
+        $user->name = $request->name; // берёт данные из формы (как $_POST['name']) и сохраняет
+        $user->email = $request->email;
+        $user->bio = $request->bio;
+
+        // обновляем пароль только если он введен
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        return redirect('/users#user-' . $user->id)->with('success', 'Пользователь успешно обновлен!');
     }
 
     public function destroy(User $user) {
@@ -50,9 +71,15 @@ class UserController extends Controller
     }
 
     public function userPosts(User $user) {
-        $posts = $user->posts; // Магия связей!
+        $posts = $user->posts()->latest()->get(); // Магия связей!
         return view('user-posts', ['user' => $user, 'posts' => $posts]);
     }
+        
+    public function userLatestsPosts(User $user) {
+        $posts = $user->posts()->latest()->limit(3)->get();
+        return view('user-latest-posts', ['user' => $user, 'posts' => $posts]);
+    }
+    
 }
 
 

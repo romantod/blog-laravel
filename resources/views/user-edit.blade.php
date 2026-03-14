@@ -13,10 +13,13 @@
         @method('PUT')
         
         <label>Имя:</label>
-        <input type="text" name="name" value="{{ $user->name }}" required>    
+        <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
+
+        <label>О себе:</label>
+        <textarea name="bio" id="bio">{{ old('bio', $user->bio) }}</textarea>    
     
         <label>Email:</label>
-        <input type="email" name="email" value="{{ $user->email }}" required>
+        <input type="email" name="email" value="{{ old('email', $user->email) }}" required>
     
         <button type="submit" class="btn btn-success">Сохранить</button>
         <a href="/users#user-{{ $user->id }}" class="btn btn-primary">Отмена</a>

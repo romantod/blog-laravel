@@ -12,7 +12,6 @@
             <h3>{{ $post->title }}</h3>
             <h4>{{ $post->content }}</h4>
             <small>Создан: {{ $post->created_at }}</small>
-            <hr>
     @endforeach
 </body>
 </html>
