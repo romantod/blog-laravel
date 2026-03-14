@@ -12,6 +12,10 @@ h1 {
     margin: 15px 0;
 }
 
+h2 { font-size: 20px; }
+h3 { font-size: 18px; }
+h4 { font-size: 16px; }
+
 /* Кнопки - спокойные цвета */
 .btn {
     display: inline-block;

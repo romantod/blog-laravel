@@ -10,7 +10,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function index() {
-        $users = User::all();
+        $users = User::orderBy('name', 'asc')->get();
         return view('users', ['users' => $users]);
     }
 

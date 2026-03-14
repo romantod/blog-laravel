@@ -36,6 +36,7 @@
                 </option>
             @endforeach
         </select>        
+        <a href="/posts" class="btn btn-primary">Отмена</a>
         <button type="submit" class="btn btn-success">Создать</button>
     </form>
 </body>

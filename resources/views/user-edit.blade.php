@@ -7,6 +7,15 @@
     <title>Редактировать пользователя</title>
 </head>
 <body>
+    @if ($errors->any())
+        <div class="alert alert-error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <h2>Редактировать: {{ $user->name }}</h2>
     <form method="POST" action="/users/{{ $user->id }}">
         @csrf

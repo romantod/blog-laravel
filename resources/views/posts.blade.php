@@ -18,18 +18,19 @@
         </div>
     @endif
     <h1>Все посты:</h1>
-    <a href="/posts/create" class="btn btn-success">Создать пост</a>
+    <div style="margin-bottom: 20px;">
+        <a href="/posts/create" class="btn btn-success">Создать пост</a>
+    </div>
     @foreach ($posts as $post)
-        <div class="post-card">
-            <strong>Заголовок: {{ $post->title }}</strong><br>
+        <div class="post-card" id="post-{{ $post->id }}">
+            <strong>{{ $post->title }}</strong><br><br>
             @if ($post->excerpt)
-                {{ $post->excerpt }}
+                {{ $post->excerpt }}<br><br>
             @endif
-            Содержание: {{ $post->content }}<br><br>
             <small>Автор: {{ $post->user->name }}</small><br>
             <a href="/posts/{{ $post->id }}" class="btn btn-primary">Просмотр</a>
             <a href="/posts/{{ $post->id }}/edit" class="btn btn-warning">Редактировать</a>
-            <form method="POST" action="/posts/{{ $post->id }}" style="display: inline;">
+            <form method="POST" action="/posts/{{ $post->id }}" style="display: inline;" onsubmit="return confirm('Вы уверены?')">
                 @csrf
                 @method ("DELETE")
                 <button type="submit" class="btn btn-danger">Удалить</button>

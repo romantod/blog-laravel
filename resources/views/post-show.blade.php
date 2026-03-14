@@ -8,11 +8,14 @@
 </head>
 <body>       
     <div class="post-card">
-        <strong>{{ $post->title }}</strong><br>
+        <strong>{{ $post->title }}</strong><br><br>
+        @if ($post->excerpt)
+                {{ $post->excerpt }}<br><br>
+            @endif
         {{ $post->content }}<br><br>
         <small>Автор: {{ $post->user->name }}</small><br>
-        <a href="/posts" class="btn btn-primary">Назад к постам</a>
-        <a href="/posts/{{ $post->id }}/edit" class="btn btn-warning">Редактировать</a>
+        <a href="/posts#post-{{ $post->id }}" class="btn btn-primary">Назад к постам</a>
+        <a href="/users/{{ $post->user->id }}/posts" class="btn btn-primary">Все посты автора</a>
     </div>
 </body>
 </html>

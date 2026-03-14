@@ -25,7 +25,7 @@
         <input type="text" name="title" value="{{ old('title', $post->title) }}" required>
 
         <label>Краткое описание:</label>
-        <textarea name="excerpt" id="excerpt">{{ old('excerpt', $post->excerpt) }}</textarea>  
+        <textarea name="excerpt" id="excerpt">{{ old('excerpt', $post->excerpt) }}</textarea> 
 
         <label>Содержание:</label>
         <textarea name="content" required>{{ old('content', $post->content) }}</textarea>
@@ -39,8 +39,8 @@
             @endforeach
         </select>
         
+        <a href="/posts#post-{{ $post->id }}" class="btn btn-primary">Отмена</a>
         <button type="submit" class="btn btn-success">Сохранить</button><br>
-        <a href="/posts" class="btn btn-primary">Отмена</a>
     </form>
 </body>
 </html>
