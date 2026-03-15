@@ -33,6 +33,11 @@
             @endforeach
         </select>
 
+        <select name="sort">
+            <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>По дате</option>
+            <option value="title" {{ request('sort') == 'title' ? 'selected' : '' }}>По заголовку</option>
+        </select>
+
         <button type="submit" class="btn btn-primary">Найти</button>
 
         {{-- Кнопка сброса — показывается только если активен поиск ИЛИ выбран автор --}}

@@ -12,14 +12,18 @@ class PostController extends Controller
     public function index(Request $request) {
         $search = $request->input('search'); // читаем поисковый запрос из URL (?search=...)
         $userId = $request->input('user_id'); // читаем выбранного автора из URL (?user_id=2)
-        $query = Post::latest(); // начинаем строить запрос
+
+        $sort = $request->input('sort', 'created_at');
+        $order = $sort === 'title' ? 'asc' : 'desc'; // если сортировка по заголовку, то будет в алфавитном порядке
+
+        $query = Post::orderBy($sort, $order); // начинаем строить SQL запрос
 
         if ($search) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%' . $search . '%'); // добавляем условие к запросу
         }
 
         if ($userId) { // добавляем фильтр по автору только если он выбран
-            $query->where('user_id', $userId);
+            $query->where('user_id', $userId); // еще добавляем условие к запросу
         }
 
         $users = User::orderBy('name')->get();
