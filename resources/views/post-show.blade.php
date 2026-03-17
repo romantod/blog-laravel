@@ -9,9 +9,11 @@
 <body>       
     <div class="post-card">
         <strong>{{ $post->title }}</strong><br><br>
+
         @if ($post->excerpt)
                 {{ $post->excerpt }}<br><br>
-            @endif
+        @endif
+        
         {{ $post->content }}<br><br>
         <small>Автор: {{ $post->user->name }}</small><br>
         <a href="/posts#post-{{ $post->id }}" class="btn btn-primary">Назад к постам</a>

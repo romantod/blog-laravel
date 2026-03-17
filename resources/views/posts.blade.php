@@ -1,3 +1,8 @@
+@php
+    /** @var \App\Models\Post $post */
+    // Это PHPDoc комментарий. @var говорит редактору — "переменная $post это объект класса App\Models\Post". Редактор видит это и знает какие свойства и методы доступны у $post, поэтому перестаёт предупреждать.
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +15,7 @@
     <nav class="nav">
         <a href="/posts" class="{{ request()->is('posts*') ? 'nav-active' : '' }}">Посты</a>
         <a href="/users" class="{{ request()->is('users*') ? 'nav-active' : '' }}">Пользователи</a>
+        <a href="/categories" class="{{ request()->is('categories*') ? 'nav-active' : '' }}">Категории</a>
     </nav>
 
     @if (session('success'))
@@ -22,6 +28,7 @@
             {{ session('error') }}
         </div>
     @endif
+    
     <form method="GET" action="/posts">
         <input type="text" name="search" value="{{ request('search') }}">
         <select name="user_id">
@@ -33,15 +40,25 @@
             @endforeach
         </select>
 
+        <select name="category_id">
+            <option value="">Все категории</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : ''}}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+
         <select name="sort">
             <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>По дате</option>
             <option value="title" {{ request('sort') == 'title' ? 'selected' : '' }}>По заголовку</option>
+            <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>По категории</option>
         </select>
 
         <button type="submit" class="btn btn-primary">Найти</button>
 
         {{-- Кнопка сброса — показывается только если активен поиск ИЛИ выбран автор --}}
-        @if (request('search') || (request('user_id')))
+        @if (request('search') || (request('user_id')) || (request('category_id')) || (request('sort')))
             <a href="/posts" class="btn btn-danger">Сбросить</a>
         @endif
 
@@ -53,7 +70,7 @@
         <a href="/posts/create" class="btn btn-success">Создать пост</a>
     </div>
 
-    @if (request('search') || request('user_id'))
+    @if (request('search') || request('user_id') || request('category_id') || request('sort'))
         @php
             $count = $posts->count();
             if ($count % 100 >= 11 && $count % 100 <= 19) {
@@ -73,6 +90,11 @@
     {{-- forelse — как foreach, но с блоком @empty если коллекция пустая --}}
     @forelse ($posts as $post)
         <div class="post-card" id="post-{{ $post->id }}">
+
+            {{-- Показываем category только если она есть --}}
+            @if ($post->category)
+                <small>{{ $post->category->name }}</small><br>            
+            @endif
             <strong>{{ $post->title }}</strong><br><br>
 
             {{-- Показываем excerpt только если он есть --}}
@@ -92,7 +114,7 @@
         </div>
     {{-- Срабатывает когда $posts пустой --}}
     @empty
-        @if (request('search') || request('user_id'))
+        @if (request('search') || request('user_id') || request('category_id') || request('sort'))
             <p>По запросу ничего не найдено</p>
         @else
             <p>Постов пока нет</p>

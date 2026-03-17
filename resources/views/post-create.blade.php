@@ -16,9 +16,23 @@
             </ul>
         </div>
     @endif
+    
     <h2>Создать пост</h2>
+
     <form method="POST" action="/posts">
         @csrf                
+        <label>Категория:</label>
+        <select name="category_id">
+            <option value="">Без категории</option>
+
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : ''}}>
+                    {{ $category->name }}
+                </option>         
+            @endforeach
+
+        </select>   
+        
         <label>Заголовок:</label>
         <input type="text" name="title" value="{{ old('title') }}" required>    
     

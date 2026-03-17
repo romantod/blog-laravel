@@ -10,6 +10,7 @@
     <nav class="nav">
         <a href="/posts" class="{{ request()->is('posts*') ? 'nav-active' : '' }}">Посты</a>
         <a href="/users" class="{{ request()->is('users*') ? 'nav-active' : '' }}">Пользователи</a>
+        <a href="/categories" class="{{ request()->is('categories*') ? 'nav-active' : '' }}">Категории</a>
     </nav>
 
     @if (session('success'))

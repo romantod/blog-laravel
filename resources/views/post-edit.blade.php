@@ -1,3 +1,7 @@
+@php
+    /** @var \App\Models\Post $post */
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +20,24 @@
             </ul>
         </div>
     @endif
+
     <h2>Редактировать: {{ $post->title }}</h2>
+
     <form method="POST" action="/posts/{{ $post->id }}">
         @csrf
         @method('PUT')
+
+        <label>Категория:</label>
+        <select name="category_id">
+            <option value="">Без категории</option>
+
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}>
+                    {{ $category->name }}
+                </option>         
+            @endforeach
+
+        </select>   
         
         <label>Заголовок:</label>
         <input type="text" name="title" value="{{ old('title', $post->title) }}" required>
