@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
-
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -111,7 +111,7 @@ class PostController extends Controller
     }
 
     public function apiShow(Post $post) {
-        return response()->json($post);
+        return new PostResource($post);
     }
 
     public function apiTags(Post $post) {
@@ -126,7 +126,7 @@ class PostController extends Controller
         ]);
 
         $post = Post::create($request->only(['title', 'content', 'user_id', 'excerpt', 'category_id']));
-        return response()->json($post, 201);
+        return (new PostResource($post))->response()->setStatusCode(201);
         // 201 — HTTP статус код "Created". Это правильный код для успешного создания ресурса.
     }
 
@@ -145,7 +145,7 @@ class PostController extends Controller
         ]);
 
         $post->update($request->only(['title', 'content', 'user_id', 'excerpt', 'category_id']));
-        return response()->json($post->fresh(), 200);        
+        return new PostResource($post);    
     }
 }
 
