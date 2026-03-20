@@ -48,4 +48,8 @@ class CategoryController extends Controller
         $category->delete();
         return redirect('/categories')->with('success', 'Категория успешно удалена!');
     }
+
+    public function apiIndex() {
+        return response()->json(Category::all());
+    }
 }

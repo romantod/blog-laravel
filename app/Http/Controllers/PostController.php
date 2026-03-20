@@ -104,4 +104,48 @@ class PostController extends Controller
         $post->delete();
         return redirect('/posts')->with('success', 'Пост успешно удален!');
     }
+
+    public function apiIndex() {
+        $posts = Post::paginate(5);
+        return response()->json($posts);
+    }
+
+    public function apiShow(Post $post) {
+        return response()->json($post);
+    }
+
+    public function apiTags(Post $post) {
+        return response()->json($post->tags);
+    }
+
+    public function apiStore(Request $request) {
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'content' => 'required|min:10',
+            'user_id' => 'required|exists:users,id'
+        ]);
+
+        $post = Post::create($request->only(['title', 'content', 'user_id', 'excerpt', 'category_id']));
+        return response()->json($post, 201);
+        // 201 — HTTP статус код "Created". Это правильный код для успешного создания ресурса.
+    }
+
+    public function apiDestroy(Post $post) {
+        $post->delete();
+        return response()->noContent();        
+    }
+
+    public function apiUpdate(Request $request, Post $post) {
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'content' => 'required|min:10',
+            'user_id' => 'required|exists:users,id',
+            'excerpt' => 'max:300',
+            'category_id' => 'nullable|exists:categories,id'
+        ]);
+
+        $post->update($request->only(['title', 'content', 'user_id', 'excerpt', 'category_id']));
+        return response()->json($post->fresh(), 200);        
+    }
 }
+
