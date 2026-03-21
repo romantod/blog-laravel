@@ -15,6 +15,8 @@ Route::get('/posts/{post}/tags', [PostController::class, 'apiTags']);
 
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'apiIndex']);
 
+Route::get('/vacancies', [PostController::class, 'apiVacancies']);
+
 Route::post('/posts', [PostController::class, 'apiStore']);
 
 Route::delete('/posts/{post}', [PostController::class, 'apiDestroy']);

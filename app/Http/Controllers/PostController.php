@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\VacancyResource;
 
 class PostController extends Controller
 {
@@ -146,6 +147,14 @@ class PostController extends Controller
 
         $post->update($request->only(['title', 'content', 'user_id', 'excerpt', 'category_id']));
         return new PostResource($post);    
+    }
+
+    public function apiVacancies() {
+        $context = stream_context_create(['http' => ['header' => 'User-Agent: Mozilla/5.0']]);
+        $json = file_get_contents('https://api.hh.ru/vacancies?text=PHP+developer&area=1146', false, $context);
+        $data = json_decode($json, true);
+        $items = $data['items'];
+        return VacancyResource::collection($items);
     }
 }
 
