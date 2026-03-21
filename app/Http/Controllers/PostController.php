@@ -149,9 +149,13 @@ class PostController extends Controller
         return new PostResource($post);    
     }
 
-    public function apiVacancies() {
+    public function apiVacancies(Request $request) {
+
         $context = stream_context_create(['http' => ['header' => 'User-Agent: Mozilla/5.0']]);
-        $json = file_get_contents('https://api.hh.ru/vacancies?text=PHP+developer&area=1146', false, $context);
+
+        $text = $request->input('text', 'PHP developer');
+
+        $json = file_get_contents('https://api.hh.ru/vacancies?text=' . $text . '&area=1146', false, $context);
         $data = json_decode($json, true);
         $items = $data['items'];
         return VacancyResource::collection($items);
