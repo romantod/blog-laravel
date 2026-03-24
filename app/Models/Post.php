@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
+    use HasFactory;
+    
     protected $fillable = ['title', 'content', 'user_id', 'excerpt', 'category_id'];
     public function user() {
         return $this->belongsTo(User::class);
@@ -17,5 +20,13 @@ class Post extends Model
 
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getShortTitle(int $length):string {
+        if (mb_strlen($this->title) > $length) {
+            return mb_substr($this->title, 0, $length) . '...';
+        } else {
+            return $this->title;
+        }
     }
 }

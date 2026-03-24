@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Tag;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\VacancyResource;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
