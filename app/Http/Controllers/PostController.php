@@ -79,7 +79,8 @@ class PostController extends Controller
         
         $post = Post::create($request->only(['title', 'content', 'user_id', 'excerpt', 'category_id']));
         $post->tags()->sync($request->input('tags', []));
-        LogPostCreated::dispatch($post);
+        LogPostCreated::dispatch($post); // отправляет Job в очередь. То есть говорит Laravel: "возьми этот Job с этими данными и положи в таблицу jobs, worker разберётся"
+        // LogPostCreated::dispatch($post)->delay(now()->addSeconds(30));
         return redirect('/posts')->with('success', 'Пост успешно создан!');
         // $request->input('tags', []) — читает массив выбранных тегов из формы, если ничего не выбрано — пустой массив. sync берёт этот массив id и записывает связи в таблицу post_tag
     }
