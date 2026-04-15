@@ -1,7 +1,7 @@
 # Blog Laravel
 
-A full-featured blog application built with Laravel 12 as a learning project.  
-Полнофункциональное блог-приложение на Laravel 12, созданное в учебных целях.
+A full-featured blog application built with Laravel 12.  
+Полнофункциональное блог-приложение на Laravel 12.
 
 ---
 
@@ -9,7 +9,7 @@ A full-featured blog application built with Laravel 12 as a learning project.
 
 ### About
 
-This project was built step by step while learning Laravel and PHP backend development. It covers a wide range of topics from basic CRUD to REST API, queues, events, caching, and Docker.
+A blog platform with authentication, REST API, background jobs, caching and Docker support.
 
 ### Features
 
@@ -76,7 +76,7 @@ Open: http://localhost:8080
 
 ### О проекте
 
-Проект создавался поэтапно в процессе изучения Laravel и PHP backend разработки. Охватывает широкий спектр тем — от базового CRUD до REST API, очередей, событий, кэширования и Docker.
+Блог-платформа с аутентификацией, REST API, фоновыми задачами, кэшированием и поддержкой Docker.
 
 ### Функциональность
 
