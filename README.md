@@ -69,7 +69,6 @@ Open: http://localhost:8080
 | POST | /api/posts | Create post |
 | PUT | /api/posts/{id} | Update post |
 | DELETE | /api/posts/{id} | Delete post |
-| GET | /api/vacancies?text=PHP | HH.ru vacancies |
 
 ---
 
@@ -137,4 +136,3 @@ docker-compose exec app php artisan migrate --seed
 | POST | /api/posts | Создать пост |
 | PUT | /api/posts/{id} | Обновить пост |
 | DELETE | /api/posts/{id} | Удалить пост |
-| GET | /api/vacancies?text=PHP | Вакансии с HH.ru |
