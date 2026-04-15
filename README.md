@@ -1,59 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Blog Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured blog application built with Laravel 12 as a learning project.  
+Полнофункциональное блог-приложение на Laravel 12, созданное в учебных целях.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🇬🇧 English
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### About
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project was built step by step while learning Laravel and PHP backend development. It covers a wide range of topics from basic CRUD to REST API, queues, events, caching, and Docker.
 
-## Learning Laravel
+### Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Posts with categories, tags, excerpts and pagination
+- Full CRUD for posts, categories, tags and users
+- Authentication via Laravel Breeze (register, login, profile)
+- Admin middleware — route protection by role
+- Search and filtering by author, category, tag
+- Sorting by date, title, category name
+- REST API with API Resources (PostResource, VacancyResource)
+- HH.ru API integration — vacancy search
+- Queue system with Jobs (`LogPostCreated`, `SendVacanciesNotification`)
+- Laravel Scheduler — automated job dispatch
+- Events and Listeners — Observer pattern
+- Cache with invalidation
+- Unit and Feature tests with factories
+- Docker setup — nginx, php-fpm, mysql
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Tech Stack
 
-## Laravel Sponsors
+- PHP 8.4
+- Laravel 12
+- MySQL 8
+- Tailwind CSS
+- Docker + nginx
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Installation (local)
 
-### Premium Partners
+```bash
+git clone <repo-url>
+cd blog-laravel
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm install && npm run build
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Login: `test@example.com` / `11111111`
 
-## Contributing
+### Installation (Docker)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+docker-compose up --build -d
+docker-compose exec app php artisan migrate --seed
+```
 
-## Code of Conduct
+Open: http://localhost:8080
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### API Endpoints
 
-## Security Vulnerabilities
+| Method | URL | Description |
+|--------|-----|-------------|
+| GET | /api/posts | List posts |
+| GET | /api/posts/{id} | Single post |
+| POST | /api/posts | Create post |
+| PUT | /api/posts/{id} | Update post |
+| DELETE | /api/posts/{id} | Delete post |
+| GET | /api/vacancies?text=PHP | HH.ru vacancies |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🇷🇺 Русский
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### О проекте
+
+Проект создавался поэтапно в процессе изучения Laravel и PHP backend разработки. Охватывает широкий спектр тем — от базового CRUD до REST API, очередей, событий, кэширования и Docker.
+
+### Функциональность
+
+- Посты с категориями, тегами, анонсами и пагинацией
+- Полный CRUD для постов, категорий, тегов и пользователей
+- Аутентификация через Laravel Breeze (регистрация, вход, профиль)
+- Middleware для администратора — защита маршрутов по роли
+- Поиск и фильтрация по автору, категории, тегу
+- Сортировка по дате, заголовку, названию категории
+- REST API с API Resources (PostResource, VacancyResource)
+- Интеграция с HH.ru API — поиск вакансий
+- Система очередей с Jobs (`LogPostCreated`, `SendVacanciesNotification`)
+- Laravel Scheduler — автоматический запуск задач по расписанию
+- Events и Listeners — паттерн Observer
+- Кэширование с инвалидацией
+- Unit и Feature тесты с фабриками
+- Docker — nginx, php-fpm, mysql
+
+### Стек технологий
+
+- PHP 8.4
+- Laravel 12
+- MySQL 8
+- Tailwind CSS
+- Docker + nginx
+
+### Установка (локально)
+
+```bash
+git clone <repo-url>
+cd blog-laravel
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm install && npm run build
+php artisan serve
+```
+
+Вход: `test@example.com` / `11111111`
+
+### Установка (Docker)
+
+```bash
+docker-compose up --build -d
+docker-compose exec app php artisan migrate --seed
+```
+
+Открыть: http://localhost:8080
+
+### API эндпоинты
+
+| Метод | URL | Описание |
+|-------|-----|----------|
+| GET | /api/posts | Список постов |
+| GET | /api/posts/{id} | Один пост |
+| POST | /api/posts | Создать пост |
+| PUT | /api/posts/{id} | Обновить пост |
+| DELETE | /api/posts/{id} | Удалить пост |
+| GET | /api/vacancies?text=PHP | Вакансии с HH.ru |
